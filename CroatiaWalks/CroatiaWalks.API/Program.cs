@@ -1,4 +1,5 @@
 using CroatiaWalks.API.Data;
+using CroatiaWalks.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,10 @@ builder.Services.AddDbContext<CROWalksDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CroatiaWalks"));
 });
 
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
